@@ -1,0 +1,51 @@
+Phần 1 – Phân tích lỗi
+
+Junior dev viết:
+
+@PostMapping("/products/{productId}")
+
+public Product updateProduct(
+        @PathVariable String productId,
+        @RequestBody Product p) {
+
+    ...
+}
+Lỗi 1 — Dùng sai HTTP Method
+Sai:
+@PostMapping
+Vì sao sai?
+
+POST dùng để:
+
+tạo mới tài nguyên
+thêm dữ liệu mới
+
+Trong khi nghiệp vụ yêu cầu:
+
+Cập nhật sản phẩm
+
+=> Phải dùng:
+
+@PutMapping
+Lỗi 2 — Endpoint không chuẩn RESTful
+
+Junior dev viết:
+
+/products/{productId}
+
+nhưng thiếu prefix version API.
+
+Theo yêu cầu nghiệp vụ phải là:
+
+/api/v1/products/{productId}
+
+RESTful API nên có:
+
+resource rõ ràng
+version API
+phân tách nghiệp vụ hợp lý
+Giải thích đúng chuẩn
+Update sản phẩm
+PUT /api/v1/products/P001
+Xóa sản phẩm
+DELETE /api/v1/products/P001
